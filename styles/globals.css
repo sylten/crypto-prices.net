@@ -55,3 +55,18 @@ th {
   position: relative;
   top: 3px;
 }
+
+@media screen and (max-width: 992px) {
+  .no-mobile {
+    display: none;
+  }
+  #panel {
+    padding: 2px;
+  }
+}
+
+@media screen and (min-width: 993px) {
+  .no-desktop {
+    display: none;
+  }
+}

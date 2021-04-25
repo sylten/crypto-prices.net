@@ -18,7 +18,9 @@ export default function Home() {
           <img src="/bitcoin2.gif"></img>
           <img src="/bitcoin2.gif"></img>
           <img src="/bitcoin2.gif"></img>
+          <br className="no-desktop" />
           TOP CRYPTO CURRENCIES
+          <br className="no-desktop" />
           <img src="/bitcoin2.gif"></img>
           <img src="/bitcoin2.gif"></img>
           <img src="/bitcoin2.gif"></img>
@@ -30,10 +32,10 @@ export default function Home() {
               <th>Symbol</th>
               <th>Name</th>
               <th>Price</th>
-              <th>Change</th>
+              <th className="no-mobile">Change</th>
               <th>Change %</th>
-              <th>Market cap</th>
-              <th>All time high</th>
+              <th className="no-mobile">Market cap</th>
+              <th className="no-mobile">All time high</th>
             </tr>
           </thead>
           <tbody>
@@ -44,10 +46,10 @@ export default function Home() {
                   <td><a href={`https://www.coingecko.com/coins/${coin.id}`} target="blank">{coin.symbol.toUpperCase()}</a></td>
                   <td>{coin.name}</td>
                   <td>{coin.current_price}</td>
-                  <td className="change">{coin.price_change_24h.toFixed(3)}</td>
+                  <td className="change no-mobile">{coin.price_change_24h.toFixed(3)}</td>
                   <td className="change">{coin.price_change_percentage_24h.toFixed(3)}%</td>
-                  <td>{coin.market_cap}</td>
-                  <td>{coin.ath}</td>
+                  <td className="no-mobile">{coin.market_cap}</td>
+                  <td className="no-mobile">{coin.ath}</td>
                 </tr>
               })
           }
