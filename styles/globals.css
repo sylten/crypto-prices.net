@@ -1,16 +1,57 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+body,html {
+  color: goldenrod;
+  background: black;
+  background-image: url('/stars.gif');
+  text-align: center;
 }
-
 a {
-  color: inherit;
-  text-decoration: none;
+  color: blue;
+}
+a:visited {
+  color: purple;
 }
 
-* {
-  box-sizing: border-box;
+#panel {
+  margin: 0 auto; 
+  max-width: 800px;
+  border: 3px solid #787032;
+  outline: 4px double green;
+  padding: 32px;
+  background: #1b2929;
+  height: 100%;
+  margin-top: 48px;
+  margin-bottom: 16px;
+}
+h1 {
+  margin-top: 0;
+  margin-bottom: 32px;
+}
+h1 img {
+  height: 22px;
+}
+table {
+  border: 1px solid #787032;
+  margin: 0 auto; 
+}
+th, td {
+  border: 1px solid #787032;
+  padding: 4px;
+}
+th {
+  text-transform: uppercase;
+}
+.positive td {
+ color: green;
+}
+.positive td.change::before {
+  content: '+';
+}
+.negative td {
+  color: red;
+}
+.coingecko img {
+  display: inline-block;
+  height: 16px;
+  position: relative;
+  top: 3px;
 }

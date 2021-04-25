@@ -1,65 +1,60 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import { useEffect, useState } from 'react';
 
 export default function Home() {
+  const [coins, setCoins] = useState([]);
+
+  const uri = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=15&page=1&sparkline=false`;
+  useEffect(() => fetch(uri).then(res => res.json()).then(coins => setCoins(coins)));
+
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
-        <title>Create Next App</title>
+        <title>Crypto Currency Prices</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+      <div id="panel">
+        <h1>
+          <img src="/bitcoin2.gif"></img>
+          <img src="/bitcoin2.gif"></img>
+          <img src="/bitcoin2.gif"></img>
+          TOP CRYPTO CURRENCIES
+          <img src="/bitcoin2.gif"></img>
+          <img src="/bitcoin2.gif"></img>
+          <img src="/bitcoin2.gif"></img>
         </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Symbol</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Change</th>
+              <th>Change %</th>
+              <th>Market cap</th>
+              <th>All time high</th>
+            </tr>
+          </thead>
+          <tbody>
+          {
+              coins.map(coin => {
+                return <tr key={coin.id} className={coin.price_change_24h > 0 ? 'positive' : 'negative'}>
+                  <td>{coin.market_cap_rank}</td>
+                  <td><a href={`https://www.coingecko.com/coins/${coin.id}`} target="blank">{coin.symbol.toUpperCase()}</a></td>
+                  <td>{coin.name}</td>
+                  <td>{coin.current_price}</td>
+                  <td className="change">{coin.price_change_24h.toFixed(3)}</td>
+                  <td className="change">{coin.price_change_percentage_24h.toFixed(3)}%</td>
+                  <td>{coin.market_cap}</td>
+                  <td>{coin.ath}</td>
+                </tr>
+              })
+          }
+          </tbody>
+        </table>
+      </div>
+      Powered by <a href="http://coingecko.com/" target="_blank" className="coingecko">CoinGecko</a>
     </div>
   )
 }
