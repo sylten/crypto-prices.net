@@ -4,12 +4,6 @@ body,html {
   background-image: url('/stars.gif');
   text-align: center;
 }
-a {
-  color: blue;
-}
-a:visited {
-  color: purple;
-}
 
 #panel {
   margin: 0 auto; 
@@ -40,13 +34,14 @@ th, td {
 th {
   text-transform: uppercase;
 }
-.positive td {
+.positive td, .positive td a, .positive td a:visited {
  color: #29b529;
 }
+
 .positive td.change::before {
   content: '+';
 }
-.negative td {
+.negative td, .negative td a, .negative td a:visited {
   color: #d42a2a;
 }
 .coingecko img {
