@@ -15,9 +15,9 @@ a:visited {
   margin: 0 auto; 
   max-width: 800px;
   border: 3px solid #787032;
-  outline: 4px double green;
+  outline: 4px double #0f4a0f;
   padding: 32px;
-  background: #1b2929;
+  background: #101f21;
   height: 100%;
   margin-top: 48px;
   margin-bottom: 16px;
@@ -41,13 +41,13 @@ th {
   text-transform: uppercase;
 }
 .positive td {
- color: green;
+ color: #29b529;
 }
 .positive td.change::before {
   content: '+';
 }
 .negative td {
-  color: red;
+  color: #d42a2a;
 }
 .coingecko img {
   display: inline-block;
