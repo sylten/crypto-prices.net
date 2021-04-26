@@ -67,6 +67,9 @@ th, td:first-child {
   color: #787032;
 }
 
+.coingecko, .coingecko a, .coingecko a:visited {
+  color: #787032;
+}
 .coingecko img {
   display: inline-block;
   height: 16px;

@@ -70,7 +70,7 @@ export default function Home() {
           <Link href={`/?page=${parseInt(page) + 1}`}>Next &gt;</Link>
         </div>
       </div>
-      Powered by <a href="http://coingecko.com/" target="_blank" className="coingecko">CoinGecko</a>
+      <span className="coingecko">Powered by <a href="http://coingecko.com/" target="_blank">CoinGecko</a></span>
     </div>
   )
 }
