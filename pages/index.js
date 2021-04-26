@@ -10,11 +10,12 @@ export default function Home() {
 
   const page = router.query.page || 1;
 
-  useEffect(() => 
+  useEffect(() => {
+    setCoins(null);
     fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=15&page=${page}&sparkline=false`)
       .then(res => res.json())
-      .then(coins => setCoins(coins)),
-  [router.query]);
+      .then(coins => setCoins(coins))
+  }, [router.query]);
 
   const tableContent = coins 
     ? coins.map(coin => (
