@@ -1,25 +1,30 @@
-import Head from 'next/head'
+import Head from 'next/head';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 
 export default function Home() {
+  const router = useRouter();
+  
   const [coins, setCoins] = useState(null);
 
-  const uri = `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=15&page=1&sparkline=false`;
-  useEffect(() => fetch(uri).then(res => res.json()).then(coins => setCoins(coins)), []);
-
-  const formatDecimals = n => n < 1 ? n.toFixed(3) : n.toFixed(2)
+  useEffect(() => 
+    fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=15&page=${router.query.page}&sparkline=false`)
+      .then(res => res.json())
+      .then(coins => setCoins(coins)),
+  [router.query]);
 
   const tableContent = coins 
     ? coins.map(coin => (
         <tr key={coin.id} className={coin.price_change_24h > 0 ? 'positive' : 'negative'}>
           <td>{coin.market_cap_rank}</td>
-          <td><a href={`https://www.coingecko.com/coins/${coin.id}`} target="blank">{coin.symbol.toUpperCase()}</a></td>
-          <td>{coin.name}</td>
-          <td>{coin.current_price}</td>
-          <td className="change no-mobile">{formatDecimals(coin.price_change_24h)}</td>
-          <td className="change">{coin.price_change_percentage_24h.toFixed(2)}%</td>
-          <td className="no-mobile">{abbr(coin.market_cap, 2)}</td>
-          <td className="no-mobile">{coin.ath}</td>
+          <td className="left"><a href={`https://www.coingecko.com/coins/${coin.id}`} target="blank">{coin.symbol.toUpperCase()}</a></td>
+          <td className="left">{coin.name}</td>
+          <td className="right">{coin.current_price.toFixed(2)}</td>
+          <td className="right change no-mobile">{coin.price_change_24h.toFixed(2)}</td>
+          <td className="right change">{coin.price_change_percentage_24h.toFixed(2)}%</td>
+          <td className="right no-mobile">{abbr(coin.market_cap, 2)}</td>
+          <td className="right no-mobile">{coin.ath.toFixed(2)}</td>
         </tr>
       ))
     : <tr><td colSpan="8">Loading...</td></tr>;
@@ -46,17 +51,22 @@ export default function Home() {
           <thead>
             <tr>
               <th>#</th>
-              <th>Symbol</th>
-              <th>Name</th>
-              <th>Price</th>
-              <th className="no-mobile">Change</th>
-              <th>Change %</th>
-              <th className="no-mobile">Market cap</th>
-              <th className="no-mobile">All time high</th>
+              <th className="left">Symbol</th>
+              <th className="left">Name</th>
+              <th className="right">Price</th>
+              <th className="right no-mobile">Change</th>
+              <th className="right">Change %</th>
+              <th className="right no-mobile">Market cap</th>
+              <th className="right no-mobile">All time high</th>
             </tr>
           </thead>
           <tbody>{tableContent}</tbody>
         </table>
+        <div className="pagination">
+          <Link href={`/?page=${Math.max(parseInt(router.query.page)-1, 1)}`}>&lt;</Link>
+          <span>{router.query.page}</span>
+          <Link href={`/?page=${Math.max(parseInt(router.query.page)+1, 1)}`}>&gt;</Link>
+        </div>
       </div>
       Powered by <a href="http://coingecko.com/" target="_blank" className="coingecko">CoinGecko</a>
     </div>
@@ -93,7 +103,7 @@ export function abbr(number, decPlaces) {
            }
 
            // Add the letter for the abbreviation
-           number += abbrev[i];
+           number = number.toFixed(2) + abbrev[i];
 
            // We are done... stop
            break;

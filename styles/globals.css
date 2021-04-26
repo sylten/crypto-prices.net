@@ -29,21 +29,41 @@ table {
 }
 th, td {
   border: 1px solid #787032;
-  padding: 4px;
+  padding: 4px 6px;
 }
-th {
+th, td:first-child {
   text-transform: uppercase;
+  color: #787032;
 }
-.positive td, .positive td a, .positive td a:visited {
+.left {
+  text-align: left;
+}
+.right {
+  text-align: right;
+}
+.left a, .left a:visited {
+  color: goldenrod;
+}
+.positive td.right {
  color: #29b529;
 }
 
 .positive td.change::before {
   content: '+';
 }
-.negative td, .negative td a, .negative td a:visited {
+.negative td.right {
   color: #d42a2a;
 }
+
+.pagination {
+  margin-top: 16px;
+  margin-bottom: -12px;
+}
+.pagination a, .pagination span {
+  margin: 0 4px;
+  color: #787032;
+}
+
 .coingecko img {
   display: inline-block;
   height: 16px;
@@ -55,8 +75,15 @@ th {
   .no-mobile {
     display: none;
   }
+  h1 {
+    margin: 16px 0;
+  }
   #panel {
     padding: 2px;
+  }
+  .pagination {
+    margin-top: 8px;
+    margin-bottom: 8px;
   }
 }
 
