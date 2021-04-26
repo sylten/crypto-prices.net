@@ -58,6 +58,9 @@ th, td:first-child {
 .pagination {
   margin-top: 16px;
   margin-bottom: -12px;
+  padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
 }
 .pagination a, .pagination span {
   margin: 0 4px;

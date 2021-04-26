@@ -8,8 +8,10 @@ export default function Home() {
   
   const [coins, setCoins] = useState(null);
 
+  const page = router.query.page || 1;
+
   useEffect(() => 
-    fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=15&page=${router.query.page}&sparkline=false`)
+    fetch(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=15&page=${page}&sparkline=false`)
       .then(res => res.json())
       .then(coins => setCoins(coins)),
   [router.query]);
@@ -63,9 +65,9 @@ export default function Home() {
           <tbody>{tableContent}</tbody>
         </table>
         <div className="pagination">
-          <Link href={`/?page=${Math.max(parseInt(router.query.page)-1, 1)}`}>&lt;</Link>
-          <span>{router.query.page}</span>
-          <Link href={`/?page=${Math.max(parseInt(router.query.page)+1, 1)}`}>&gt;</Link>
+          <Link href={`/?page=${Math.max(parseInt(page) - 1, 1)}`}>&lt; Previous</Link>
+          <span>{page}</span>
+          <Link href={`/?page=${parseInt(page) + 1}`}>Next &gt;</Link>
         </div>
       </div>
       Powered by <a href="http://coingecko.com/" target="_blank" className="coingecko">CoinGecko</a>
